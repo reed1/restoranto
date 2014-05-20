@@ -12,15 +12,64 @@ block append js
 
 block content
   .container
-    table#table-warung.display
+
+    h2 Server Side Processing
+    table#table-serverside.display
       thead
         tr
           th Id
           th Name
           th Owner
+
+    h2 Html Rendered
+    table#table-html
+      thead
+        tr
+          th Id
+          th Name
+          th Owner
+      tbody
+        for warung in warungs
+          tr
+            td #{warung._id}
+            td #{warung.name}
+            td #{warung.owner}
+
+    h2 Javascript Injected Data
+    table#table-jsinjected
+      thead
+        tr
+          th Id
+          th Name
+          th Owner
+
     script(type='text/javascript').
-      $('#table-warung').dataTable({
-        processing: true,
-        serverSide: true,
-        ajax: './warung-data'
+
+
+      $(function() {
+
+        // server side
+        $('#table-serverside').dataTable({
+          processing: true,
+          serverSide: true,
+          ajax: './warung-data'
+        });
+
+        // html rendered
+        $('#table-html').dataTable({});
+
+        // javascript injected data
+        var rows = [];
+        var warungs = !{JSON.stringify(warungs)};
+        for (i in warungs) {
+          var warung = warungs[i];
+          rows.push([warung._id, warung.name, warung.owner]);
+        }
+        $('#table-jsinjected').dataTable({data: rows});
+
       });
+
+  .footer
+    hr
+    .container This is footer
+    hr

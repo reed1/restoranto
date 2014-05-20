@@ -1,11 +1,17 @@
 
-var mongooseDatatable = require('../../lib/mongoose-datatable')
+var mongoose = require('mongoose'),
+
+  mongooseDatatable = require('../../lib/mongoose-datatable')
   ;
 
 module.exports = function(app) {
 
   app.get('/warung', function(req, res) {
-    res.render('datatable/warung');
+    mongoose.model('warung').find().lean().exec(function(err, warungs) {
+
+      res.render('datatable/warung', { warungs: warungs });
+
+    });
   });
 
   app.get('/warung-data', mongooseDatatable.createHandler({

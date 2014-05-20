@@ -95,8 +95,8 @@ it should be on it's own business logic layer, for now the auth is implemented l
 
 ### Db
 
-Uses [mongodb](http://www.mongodb.org) as database and [mongoose](http://mongoosejs.com) as ODM
-schema located at
+Uses [mongodb](http://www.mongodb.org) as database and [mongoose](http://mongoosejs.com) as ODM.
+Schema located at
 
     /db/models/*
 

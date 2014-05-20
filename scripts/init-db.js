@@ -33,7 +33,7 @@ function main(cb) {
       var nameGen = NameGenerator(['jo', 'ko', 'wi', 'su', 'par', 'man', 'se', 'ku', 'teng'], 2, 3);
       var ownerGen = NameGenerator(['ma', 'kan', 'a', 'yam', 'go', 'reng'], 3, 2);
 
-      async.eachSeries(_.range(300), function (i, cb) {
+      async.eachSeries(_.range(50), function (i, cb) {
         new model({
           name: nameGen(),
           owner: ownerGen()
