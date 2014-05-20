@@ -14,21 +14,13 @@ function main(cb) {
   async.series([
     function(cb) {
       // drop existing data
-      model.collection.drop(cb);
+      model.collection.drop(function(){cb()});
     },
     function(cb) {
       // reset autoincrement counter
-      model.resetCount(cb);
+      model.resetCount(function(){cb()});
     },
     function(cb) {
-      // ensure text index
-      model.collection.ensureIndex({
-        name: 'text',
-        owner: 'text'
-      }, cb);
-    },
-    function(cb) {
-
       // generate random warungs
       var nameGen = NameGenerator(['jo', 'ko', 'wi', 'su', 'par', 'man', 'se', 'ku', 'teng'], 2, 3);
       var ownerGen = NameGenerator(['ma', 'kan', 'a', 'yam', 'go', 'reng'], 3, 2);
@@ -38,6 +30,13 @@ function main(cb) {
           name: nameGen(),
           owner: ownerGen()
         }).save(cb);
+      }, cb);
+    },
+    function(cb) {
+      // ensure text index
+      model.collection.ensureIndex({
+        name: 'text',
+        owner: 'text'
       }, cb);
     }
   ], cb);
