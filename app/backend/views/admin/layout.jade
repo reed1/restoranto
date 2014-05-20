@@ -1,0 +1,36 @@
+doctype html
+html
+head
+  title
+    block title
+
+  block css
+    link(rel="stylesheet", href="/web/lib/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/web/lib/bootstrap/dist/css/bootstrap-theme.min.css")
+
+  block js
+    script(type="text/javascript", src="/web/lib/jquery/dist/jquery.min.js")
+    script(type="text/javascript", src="/web/lib/bootstrap/dist/js/bootstrap.min.js")
+
+  block vars
+
+body
+  nav.navbar.navbar-inverse
+    a.navbar-brand(href='#') Admin Backend
+
+    .navbar-right
+      ul.nav.navbar-nav
+
+        li(class= page==='index'?'active':'')
+          a(href='/#{app}/admin/index') Admin Index
+
+        li(class= page==='tools'?'active':'')
+          a(href='/#{app}/admin/tools') Admin Tools
+
+        li(class= page==='login'?'active':'')
+          a(href='/#{app}/admin/login') Login
+
+        li
+          a(href='/#{app}/admin/logout') Logout
+
+  block content

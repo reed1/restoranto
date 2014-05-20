@@ -1,0 +1,33 @@
+{
+  "apps": [
+    {
+      "name": "backend",
+      "redirects": {
+        "/": "/admin/login"
+      },
+      "errorTemplates": {
+        "404": "error/404"
+      }
+    },
+    {
+      "name": "frontend",
+      "redirects": {
+        "/": "/index"
+      },
+      "errorTemplates": {
+        "404": "error/404"
+      }
+    },
+    {
+      "name": "static"
+    }
+  ],
+
+  "redirects": {
+    "/": "/frontend",
+    "/all-about-us": "/static/page/about",
+    "/all/about/you": "/static/page/about"
+  },
+
+  "resourcePrefix": "/web"
+}
