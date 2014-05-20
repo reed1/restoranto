@@ -1,0 +1,26 @@
+
+extends ../layout
+
+block vars
+  - var page = 'warung'
+
+block append css
+  link(rel='stylesheet', href='/web/lib/datatables/media/css/jquery.dataTables.css')
+
+block append js
+  script(type='text/javascript', src='/web/lib/datatables/media/js/jquery.dataTables.js')
+
+block content
+  .container
+    table#table-warung.display
+      thead
+        tr
+          th Id
+          th Name
+          th Owner
+    script(type='text/javascript').
+      $('#table-warung').dataTable({
+        processing: true,
+        serverSide: true,
+        ajax: './warung-data'
+      });

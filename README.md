@@ -1,5 +1,5 @@
 
-# resoranto
+# restoranto
 
 restoranco app on top of petakumpet flavored express
 
@@ -11,12 +11,13 @@ Ensure you have installed nodejs (node & npm commands are in path)
 
     git clone https://github.com/reed1/restoranto.git
     cd restoranto
-    npm install                        #install server side libraries
-    ./node_modules/.bin/bower install  #install client side libraries
-    node index.js                      #start the server
+    npm install                          # install server side libraries
+    ./node_modules/.bin/bower install    # install client side libraries
+    node scripts/init-db.js              # reset & initialize db data
+    node index.js                        # start the server
     
 be sure to restart the server (abort and re-run the last command) after code changes 
-or use [nodemon](nodemon.io) like for automated restart
+or use [nodemon](http://nodemon.io) like for automated restart
 
 ***
 
@@ -79,7 +80,7 @@ Will have it's own space in "static" app, it's not supported on framework level.
 
 ### Templating
 
-Uses [Jade](www.jade-lang.com)
+Uses [Jade](http://www.jade-lang.com)
 
 layout is not enforced, can be multi level, etc.
 Also with jade you get layout, variables, includes, blocks, ...
@@ -94,13 +95,10 @@ it should be on it's own business logic layer, for now the auth is implemented l
 
 ### Db
 
-Not supported yet, but likely Bookshelf (if relational) and mongoose (if nosql)
+Uses [mongodb](http://www.mongodb.org) as database and [mongoose](http://mongoosejs.com) as ODM
+schema located at
 
-### Server-Side Widgets
-
-Not supported yet. Separation of concerns is always recommended, 
-but this one is for widget that has tight binding (and opinionated) server-client, 
-and re-used multiple times.
+    /db/models/*
 
 ### Server side libraries
 
@@ -118,6 +116,52 @@ like jquery, bootstrap, etc are managed through bower, example:
 
 _--save_ means the package name will automatically be saved in bower.json file
     
+***
+
+## Extras
+
+### Datatable
+
+Generic server side datatable handler for a mongodb model
+
+* Create a Schema then populate some data
+
+        var WarungSchema = new mongoose.Schema({
+          _id: Number,
+          name: String,
+          owner: String
+        }, { collection: 'warung' })
+        
+* Put this in the view
+
+        table#table-warung.display
+          thead
+            tr
+              th Id
+              th Name
+              th Owner
+        script(type='text/javascript').
+          $('#table-warung').dataTable({
+            processing: true,
+            serverSide: true,
+            ajax: './warung-data'
+          });
+
+* Import the handler factory, located in 
+
+        /lib/mongoose-datatable
+     
+* Handle the "./warung-data" ajax path
+
+        app.get('/warung-data', mongooseDatatable.createHandler({
+          model: 'warung',
+          columns: [ '_id', 'name', 'owner' ],
+          baseQuery: {}
+        }));
+        
+That will handle request from datatable (sorting, limit, offset, etc) and returns the appropriate data
+recognized by datatable. Text search is supported too (given text index is available on the model)
+
 ***
 
 That's all and kiss..

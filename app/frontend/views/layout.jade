@@ -1,7 +1,7 @@
+doctype html
+head
+  block title
 
-extends ./layout_base
-
-block head
   block css
     link(rel="stylesheet", href="/web/lib/bootstrap/dist/css/bootstrap.min.css")
     link(rel="stylesheet", href="/web/lib/bootstrap/dist/css/bootstrap-theme.min.css")
@@ -10,5 +10,10 @@ block head
     script(type="text/javascript", src="/web/lib/jquery/dist/jquery.min.js")
     script(type="text/javascript", src="/web/lib/bootstrap/dist/js/bootstrap.min.js")
 
-block body
+  block vars
+
+body
+
+  include ./components/navbar
+
   block content
