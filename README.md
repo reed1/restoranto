@@ -7,7 +7,7 @@ restoranco app on top of petakumpet flavored express
 
 ### How to run
 
-Ensure you have installed nodejs (node & npm commands are in path)
+Ensure you have nodejs and mongodb installed
 
     git clone https://github.com/reed1/restoranto.git
     cd restoranto
@@ -27,11 +27,11 @@ Routing schema is defined like this : /appName/controllerName/actionName
 
 * action is managed in controller js file, also the methods, example:
         
-        app.get('/login', function(req, res) {
+        get('/login', function(req, res) {
           res.render('admin/login');
         });
         
-        app.post('/login', function(req, res) {
+        post('/login', function(req, res) {
           // code..
         });
         
@@ -72,7 +72,7 @@ Root level web resource is provided for shared resources.
 
 * app level web resource path is 
 
-        /appName/web
+        /<appName>/web
 
 ### Static pages
 
@@ -153,7 +153,7 @@ Generic server side datatable handler for a mongodb model
      
 * Handle the "./warung-data" ajax path
 
-        app.get('/warung-data', mongooseDatatable.createHandler({
+        get('/warung-data', mongooseDatatable.createHandler({
           model: 'warung',
           columns: [ '_id', 'name', 'owner' ],
           baseQuery: {}
