@@ -40,7 +40,7 @@ module.exports = function(app) {
     delete req.session[SESSION_TAG];
 
     // redirect relative style
-    res.redirect(req.path + '/../login');
+    res.redirect('./login');
 
     // or absolute style
     // res.redirect('/backend/admin/login');
