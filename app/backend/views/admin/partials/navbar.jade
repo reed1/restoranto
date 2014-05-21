@@ -1,7 +1,7 @@
 
 mixin link(actionLink, label)
   li(class= action===actionLink ? 'active':'')
-    a(href= '/'+app+'/'+controller+'/'+actionLink) #{label}
+    a(href= '/#{app}/#{controller}/#{actionLink}') #{label}
 
 nav.navbar.navbar-inverse
   a.navbar-brand(href='#') Admin Backend

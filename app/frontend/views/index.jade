@@ -12,10 +12,8 @@ mixin donec()
 // can append or prepend or replace block ( jade ftw.. )
 block append js
 
-  // app name variable is injected too
-  script(type="text/javascript", src="/#{app}/web/js/index.js")
-  // or without app variable..
-  script(type="text/javascript", src="/frontend/web/js/other.js")
+  script(type='text/javascript', src='/#{app}/web/js/index.js')
+  script(type='text/javascript', src='/#{app}/web/js/other.js')
 
 block content
 
@@ -23,6 +21,8 @@ block content
     .container
       h1 Welcome
       p App Name = #{app}
+      p Controller Name = #{controller}
+      p Action Name = #{action}
 
       #append-this-one
 

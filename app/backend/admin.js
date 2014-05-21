@@ -7,10 +7,12 @@ function adminAuth(req, res, next) {
 
     // pass to view
     res.locals.adminAuth = true;
-
     next();
+
   } else {
-    res.redirect('/'+res.locals.app+'/admin/login');
+
+    req.flash('login', 'unauthorized');
+    res.redirect('./login');
   }
 }
 
@@ -25,17 +27,23 @@ module.exports = function(get, post) {
   });
 
   get('login', function(req, res) {
-    res.render('admin/login');
+
+    var flash = req.flash('login')[0];
+
+    res.render('admin/login', {
+      flash: flash
+    });
   });
 
   post('login', function(req, res) {
 
     if (req.body.email === 'admin@l2p.net' && req.body.password === '1') {
       req.session[SESSION_TAG] = true;
-      res.redirect(req.path + '/../index');
+      res.redirect('./index');
     }
     else {
-      res.send('400', 'Bad Auth..');
+      req.flash('login', 'bad-auth');
+      res.redirect('./login');
     }
 
   });
@@ -50,7 +58,7 @@ module.exports = function(get, post) {
     // res.redirect('/backend/admin/login');
 
     // or app level absolute style
-    // res.redirect('/' + res.locals.app + '/admin/login');
+    // res.redirect('/' + res.locals.app + '/' + res.locals.controller '/login');
   });
 
   get('forgot-password', function(req, res) {
