@@ -2,7 +2,6 @@ var express = require('express'),
 
   config = require('./config/config');
 
-require('express-namespace');
 require('./db/index');
 
 var app = express();

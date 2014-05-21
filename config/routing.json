@@ -3,7 +3,7 @@
     {
       "name": "backend",
       "redirects": {
-        "/": "/admin/login"
+        "/": "/admin/index"
       },
       "errorTemplates": {
         "404": "error/404"
@@ -12,7 +12,7 @@
     {
       "name": "frontend",
       "redirects": {
-        "/": "/index"
+        "/": "/home/index"
       },
       "errorTemplates": {
         "404": "error/404"

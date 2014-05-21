@@ -1,0 +1,18 @@
+
+mixin link(actionLink, label)
+  li(class= action===actionLink ? 'active':'')
+    a(href= '/'+app+'/'+controller+'/'+actionLink) #{label}
+
+nav.navbar.navbar-inverse
+  a.navbar-brand(href='#') Admin Backend
+
+  .navbar-right
+    ul.nav.navbar-nav
+
+      if adminAuth
+        +link('index', 'Admin Index')
+        +link('tools', 'Admin Tools')
+        +link('logout', 'Logout')
+
+      else
+        +link('login', 'Login')

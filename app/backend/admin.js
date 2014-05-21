@@ -4,27 +4,31 @@ var SESSION_TAG = 'admin-backend';
 // restrict access for admin backend only
 function adminAuth(req, res, next) {
   if (req.session[SESSION_TAG] === true) {
+
+    // pass to view
+    res.locals.adminAuth = true;
+
     next();
   } else {
-    res.send('401', 'Access Denied');
+    res.redirect('/'+res.locals.app+'/admin/login');
   }
 }
 
-module.exports = function(app) {
+module.exports = function(get, post) {
 
-  app.get('/index', adminAuth, function(req, res) {
+  get('index', adminAuth, function(req, res) {
     res.render('admin/index');
   });
 
-  app.get('/tools', adminAuth, function(req, res) {
+  get('tools', adminAuth, function(req, res) {
     res.render('admin/tools');
   });
 
-  app.get('/login', function(req, res) {
+  get('login', function(req, res) {
     res.render('admin/login');
   });
 
-  app.post('/login', function(req, res) {
+  post('login', function(req, res) {
 
     if (req.body.email === 'admin@l2p.net' && req.body.password === '1') {
       req.session[SESSION_TAG] = true;
@@ -36,7 +40,7 @@ module.exports = function(app) {
 
   });
 
-  app.get('/logout', function(req, res) {
+  get('logout', function(req, res) {
     delete req.session[SESSION_TAG];
 
     // redirect relative style
@@ -49,7 +53,7 @@ module.exports = function(app) {
     // res.redirect('/' + res.locals.app + '/admin/login');
   });
 
-  app.get('/forgot-password', function(req, res) {
+  get('forgot-password', function(req, res) {
     res.send('Gw juga gak tau bro..');
   });
 

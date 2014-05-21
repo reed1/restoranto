@@ -1,4 +1,5 @@
 doctype html
+html
 head
   block title
 
@@ -10,10 +11,8 @@ head
     script(type="text/javascript", src="/web/lib/jquery/dist/jquery.min.js")
     script(type="text/javascript", src="/web/lib/bootstrap/dist/js/bootstrap.min.js")
 
-  block vars
-
 body
 
-  include ./components/navbar
+  include ./partials/navbar
 
   block content
